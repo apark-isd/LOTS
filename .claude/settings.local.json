@@ -10,7 +10,8 @@
       "Bash(git add:*)",
       "Bash(powershell:*)",
       "Bash(dir nul)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

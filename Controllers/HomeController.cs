@@ -15,13 +15,6 @@ namespace LOTS3.Controllers
 {
     public class HomeController : Controller
     {
-        /*  
-        //Test error handleing with RayGun on Andrew's master 4-5-22
-        public ViewResult Index(int? id)
-        {
-            throw new Exception("This is a test exception!");
-        }
-        */
         public async Task<IActionResult> GetSignatureAsync(string employeeNo, string password)
         {
             string url = $"https://fleetapi.isd.lacounty.gov/inventory/ValidateEmployee?ei={employeeNo}&p={password}";
