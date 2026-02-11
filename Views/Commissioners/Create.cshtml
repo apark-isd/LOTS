@@ -1,0 +1,67 @@
+﻿@model LOTS3.Models.Commissioner
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 style="padding-top:1em;">Create Commissioner<a style="display: inline; font-size: 14px;"></a></h4>
+<form enctype="multipart/form-data" asp-action="Create" method="post" class="mt-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6">
+            <strong><span style="color:red;"></span> Department:</strong><br />
+            <span style="padding-bottom:7px;">
+                <select asp-for="DepartmentId" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Departments,"Id","DepartmentName", TempData["deptId"]))">
+                    <option value="">-- Select department --</option>
+                </select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </span>
+        </span>
+            <span class="col-md-6">
+            <strong><span style="color:red;"></span> Lot:</strong>
+            <span style="padding-bottom:7px;">
+                <select asp-for="LotId" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Lots,"Id","LotName"))">
+                    <option value="">-- Select Lot --</option>
+                </select>
+                <span asp-validation-for="LotId" class="text-danger"></span>
+            </span>
+        </span>
+        </div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6">
+                <strong><span style="color:red;"></span> Last Name:</strong>
+                <span style="padding-bottom:7px;">
+                    <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </span>
+            </span>
+            <span class="col-md-6 ">
+                <strong><span style="color:red;"></span> First Name:</strong>
+                <span style="padding-bottom:7px;">
+                    <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </span>
+            </span>
+        </div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6">
+                <strong><span style="color:red;"></span>Start Date:</strong>
+                <input id="StartDate" asp-for="StartDate" class="form-control" />
+            </span>
+            <span class="col-md-6">
+                <strong><span style="color:red;"></span>End Date:</strong>
+                <input id="EndDate" asp-for="EndDate" class="form-control" />
+            </span>
+        </div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6">
+                <strong><span style="color:red;"></span>Card Number:</strong>
+                <input id="CardNumber" asp-for="CardNumber" class="form-control" />
+            </span>
+        </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" /> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</form>

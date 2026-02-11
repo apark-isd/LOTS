@@ -1,0 +1,379 @@
+﻿@model LOTS3.Models.VehicleLiabilityWaiver
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    p {line-height: 1em;}
+    strong {font-weight:bold;}
+    div {vertical-align:bottom;}
+    .mt-3 {
+        margin-top: 0 !important;
+    }
+    .lb-md {
+        font-size: 17px;
+        font-weight: 500;
+        color: black;
+        width: auto;
+    }
+    .form-control:focus:active {
+        background-color: #e6e6ff !important;
+        border-color: #e6e6ff;
+    }
+    .form-control{
+        background-color: #e6e6ff !important;
+        border-color: #e6e6ff;
+        font-weight:bold;
+        color: black;
+       /* width:auto;*/
+    }
+    .ml1{
+        margin-left: 1em;
+    }
+    .ml2{
+        margin-left: 2em;
+        color: black;
+    }
+    .ml3 {
+        margin-left: 3em;
+        color: black;
+    }
+    .ml4 {
+        margin-left: 4em;
+        color: black;
+    }
+</style>
+<form asp-action="Edit" method="post">
+    <div class="row mt-4"></div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="card border-0" style="background-image: url('ApprovedStamp.jpg')">
+        <div class="row mt-2 mb-1">
+            @* <div class="col-sm ml-lg-3"> *@
+            <div class="col-sm">
+                <h3><strong>ISD PARKING SERVICES</strong></h3>
+                <h5>Telephone: (213)974-9505</h5>
+                <h6>E-mail: <a href="mailto:ISDParkingRequest@isd.lacounty.gov"><u>ISDParkingRequest@isd.lacounty.gov</u></a></h6>
+            </div>
+            <div class="col-sm blink">
+            @if(Model.StatusTypeId== 1)
+            {
+                 <img src="~/images/PendingReviewStamp.jpg" style="width:180px; height:130px;"/>
+            }
+            @if (Model.StatusTypeId == 2)
+            {
+                <img src="~/images/ApprovedStamp.jpg" style="width:180px; height:130px;" align="middle"/>
+            }
+            @if (Model.StatusTypeId == 3)
+            {
+                <img src="~/images/RejectedStamp.jpg" style="width:180px; height:130px;" align="middle"/>
+            }
+            </div>
+            <div class="col-sm">
+                <img src="~/img/ISD_02.png" style="width:140px; height:130px;" align="right" />
+            </div>
+        </div>
+        <div class="form-group border border-dark">
+            <div class="form-group border border-dark font-weight-bold text-center p-1 mb-2 bg-dark text-white">
+                VEHICLE LIABILITY WAIVER
+            </div>
+            <div class="form-group font-weight-bold text-center mt-lg-3 mb-lg-3 text-danger h5">
+                <u>Subject to review & approval by ISD Parking Services</u>
+            </div>
+            <div class="form-group ml1 font-weight-bold lh-lg text-dark col-sm-10">
+                Forms must be submitted to <a href="mailto:ISDParkingRequest@isd.lacounty.gov" class="text-primary"><u>ISD Parking Services</u></a> via email by 2:00 PM for same day requests,
+                or 24-hours in adance for future requests.
+            </div>
+            <div class="ml2 mb-2 row">
+                <label for="DateRequested" class="lb-md">Date(s) Requested:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" asp-for="DateRequested" asp-format="{0:yyyy-MM-dd}">
+                </div>
+            </div>
+            <div class="ml2 mb-4 row">
+                <label for="ReasonForRequested" class="lb-md">Reason for Request:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="ReasonForRequest">
+                </div>
+            </div>
+            <div class="ml2 mb-2 row">
+                <p class="h6"><u><strong>Vehicle Owner's Information</strong></u></p>
+            </div>
+            <div class="ml2 mb-4 row">
+                <label for="Name" class="lb-md ">Name:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" asp-for="Name">
+                </div>
+            </div>
+            <div class="ml2 mb-1 row">
+                <p class="lb-md">County of Los Angeles Employee? (Mark Appropriate Box)</p>
+            </div>
+            <div class="ml4 mb-1 row">
+                <input class="form-check-input" type="checkbox" id="YesEmployee" asp-for="YesEmployee">
+                <label class="form-check-label" for="yesEmployeeNumber">Yes - Employee Number:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" asp-for="EmployeeNumber">
+                </div>
+                <label for="department">Department:</label>
+                <div class="col-sm-5">
+                    @*<input type="text" class="form-control" asp-for="DepartmentId">*@
+                    <select asp-for="DepartmentId" class="form-control"
+                            asp-items="@(new SelectList(ViewBag.Department,"Id","DepartmentName"))">
+                        <option value="">-- Select department --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ml4 mb-4 row">
+                <input class="form-check-input" type="checkbox" id="NoCompany" asp-for="NoCompany">
+                <label class="form-check-label" for="gridCheck">No - Company</label>
+            </div>
+            <div class="ml2 mb-2 row">
+                <p class="h6"><strong>Parking Lot Information:</strong></p>
+            </div>
+            <div class="ml2 mb-4 row">
+                <label for="LotNumber">Lot Number:</label>
+                <div class="col-sm-2">
+                    @*<input type="text" class="form-control" asp-for="LotId" />*@
+                    <select asp-for="LotId" class="form-control"
+                            asp-items="@(new SelectList(ViewBag.Lot,"Id","LotName"))">
+                        <option value="">-- Select Lot --</option>
+                    </select>
+                </div>
+                <label for="permitNumber">Permit Number(if applicable)</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" asp-for="PermitNo" />
+                </div>
+            </div>
+            <div class="ml2 mb-2 row">
+                <p class="h6"><strong>Vehicle Information:</strong></p>
+            </div>
+            <div class="ml2 mb-2 row">
+                <label for="year">Year:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" asp-for="Year" />
+                </div>
+                <label for="makeModel">Make/Model:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" asp-for="MakeModel" />
+                </div>
+                <label for="color">Color:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" asp-for="Color" />
+                </div>
+            </div>
+            <div class="ml2 mb-4 row">
+                <label for="licensePlateNumber">License Plate Number:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" asp-for="LicensePlateNumber" />
+                </div>
+            </div>
+            <div class="form-group border border-dark font-weight-bold text-center p-1 mb-2 bg-secondary text-dark">
+                DISCLAIMER AND SIGNATURE
+            </div>
+            <div class="form-group ml-3 font-weight-bold lh-lg col-sm-10">
+                I agree that the County of Los Angeles <b><u>WILL NOT</u></b> be held responsible for any damages
+                or loss to my vehicle, or liability incurred by my vehicle, while parked in this parking lot on the date(s) requested above.</p>
+            </div>
+            <div class="form-group row ml-3">
+                <button type="button" class="btn btn-primary btnSignature" data-toggle="modal" data-target="#signatureModal">Signature</button>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="Signature" readonly />
+                </div>
+            </div>
+            <div class="form-group row ml-3">
+                <button type="button" class="btn btn-primary btnSignature" data-toggle="modal" data-target="#acknowledgeModal">Acknowledge</button>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="AcknowledgedBy" readonly />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        @if (User.IsInRole("ISD Parking Services") || User.IsInRole("Administrator"))
+        {
+            <div class="col-sm-2">
+                <select asp-for="StatusTypeId" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.StatusTypes,"Id","StatusTypeName"))">
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary btnSignature" data-toggle="modal" data-target="#approvedByModal">Confirm</button>
+        }
+        else
+        {
+            <div class="col-sm-2">
+                <select asp-for="StatusTypeId" class="form-control" readonly="true" disabled="true"
+                    asp-items="@(new SelectList(ViewBag.StatusTypes,"Id","StatusTypeName"))">
+                </select>
+            </div>
+        }
+        <div class="col-sm-9">
+            <input type="text" class="form-control" asp-for="ApprovedBy" readonly />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Update" class="btn btn-primary" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button id="btnPrint" class="btn btn-primary ignoreForPdf">Print</button>
+        </div>
+    </div>
+</form>
+<div class="modal fade" id="signatureModal" tabindex="-1" aria-labelledby="signatureModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signatureModalLabel">Please Enter Username and Password</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="employeeNo" class="col-form-label">Username:</label>
+                        <input id="employeeNo" placeholder="Employee Number" type="text" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="col-form-label">Password:</label>
+                        <input id="password" placeholder="Password" type="password" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSignature" class="btn btn-primary" data-dismiss="modal">Signature</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="acknowledgeModal" tabindex="-1" aria-labelledby="signatureModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signatureModalLabel">Please Enter Username and Password</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="employeeNo1" class="col-form-label">Username:</label>
+                        <input id="employeeNo1" placeholder="Employee Number" type="text" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password1" class="col-form-label">Password:</label>
+                        <input id="password1" placeholder="Password" type="password" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnAcknowledgeByModal" class="btn btn-primary" data-dismiss="modal">Signature</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="approvedByModal" tabindex="-1" aria-labelledby="signatureModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signatureModalLabel">Please Enter Username and Password</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="employeeNo2" class="col-form-label">Username:</label>
+                        <input id="employeeNo2" placeholder="Employee Number" type="text" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password2" class="col-form-label">Password:</label>
+                        <input id="password2" placeholder="Password" type="password" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnApprovedByModal" class="btn btn-primary" data-dismiss="modal">Signature</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+<script type="text/javascript">
+    $("#btnPrint").click(function () {
+        $(".ignoreForPdf").hide();
+        $(".btnSignature").hide();
+        window.print();
+        $(".ignoreForPdf").show();
+        $(".btnSignature").show();
+    });
+    $(function () {
+        $('#btnSignature').on("click", function () {
+            var url = '@Url.Action("GetSignature", "VehicleLiabilityWaivers")';
+            {
+                $.ajax
+                    ({
+                        url: url,
+                        data:
+                        {
+                            employeeNo: $('#employeeNo').val(),
+                            password: $('#password').val(),
+                        },
+                        type: 'GET',
+                        success: function (result) { $('#Signature').val(result.value); }
+                    });
+            }
+        }
+        );
+    }
+    )
+    $(function () {
+        $('#btnAcknowledgeByModal').on("click", function () {
+            var url = '@Url.Action("GetAcknowledgement", "VehicleLiabilityWaivers")';
+            {
+                $.ajax
+                    ({
+                        url: url,
+                        data:
+                        {
+                            employeeNo: $('#employeeNo1').val(),
+                            password: $('#password1').val(),
+                        },
+                        type: 'GET',
+                        success: function (result) { $('#AcknowledgedBy').val(result.value); }
+                    });
+            }
+        }
+        );
+    }
+    )
+    $(function () {
+            $('#btnApprovedByModal').on("click", function () {
+                var url = '@Url.Action("GetApproval","VehicleLiabilityWaivers")';
+                {
+                    $.ajax
+                        ({
+                            url: url,
+                            data:
+                            {
+                                employeeNo: $('#employeeNo2').val(),
+                                password: $('#password2').val(),
+                                statusTypeId: $('#StatusTypeId').val(),
+                            },
+                            type: 'GET',
+                            success: function (result) { $('#ApprovedBy').val(result.value); }
+                        });
+                }
+            }
+            );
+        }
+    )
+    
+    </script>
+}
+
+

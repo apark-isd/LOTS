@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "identityapp1": {
+      "type": "identityapp.aad"
+    },
+    "secrets1": {
+      "secretStore": null,
+      "resourceId": null,
+      "type": "secrets.user",
+      "connectionId": null
+    },
+    "mssql1": {
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/db-lots/databases/LOTS",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:PermitteeDBConnection"
+    }
+  }
+}

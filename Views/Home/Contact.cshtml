@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="padding-top:1em;">Contact</h1>
+
+<div class="container">
+
+    <!-- Page Content -->
+    <div class="container" style="padding-top:1em; padding-bottom:3em;">
+        <div class="col-md-12 col-sm-12 col-xs-12" style="background-color:#fff; padding:1.5em;">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <form id="contact-form" class="styled-form" action="" method="post" accept-charset="utf-8">
+                        <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="8ece95d139633656ad0371bf53c45b2d" /></div>
+
+                        <div class="form-group">
+                            <label for="id_name"><span style="color:red;">*</span> Name: </label>
+                            <div class="col-md-12">
+                                <input type="text" name="name" id="id_name" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_email"><span style="color:red;">*</span> Email: </label>
+                            <div class="col-md-12">
+                                <input type="text" name="email" id="id_email" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_message"><span style="color:red;">*</span> Message: </label>
+                            <div class="col-md-12">
+                                <textarea cols="40" rows="9" name="message" id="id_message" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <p class="submit-row pull-right">
+                            <div class="col-3">
+                                <button type="submit" class="btn btn-success btn-block" style="width:100%;">SEND</button>
+                            </div>
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

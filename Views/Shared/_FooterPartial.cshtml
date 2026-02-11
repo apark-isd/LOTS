@@ -1,0 +1,57 @@
+﻿@*         *@
+<div class="bg-primary" style="padding:1em; color:#fff; background-color: #0b406c;">
+    <div class="container">
+        <div id="links" class="col-lg-16">
+            <div class="row">
+                <div class="col-md-2" style="padding-top:1em;">
+                    <div class="col-12" style="font-size:18px;"> </div>
+                    <div class="row">
+                        <div class="col-12" style="padding-top:1em; padding-left:.15em;">
+                            <img src="~/img/lacounty_logo.png" class="img-responsive" width="90" height="90" alt="county seal" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" style="padding-top: 1em; ">
+                    <span style="padding-left:1em;">Resources</span>
+                    <div class="row">
+                        <ul style="list-style-type:none;">
+                            <li> <a asp-area="" asp-controller="Departments" asp-action="index"><span class="fa fa-building"></span><span style="padding-left:.5em;">LOTS Department</span></a></li>
+                            <li> <a asp-area="" asp-controller="Coordinators" asp-action="index"><span class="fa fa-user"></span><span style="padding-left:.5em;">LOTS Cordinator</span></a></li>
+                            <li> <a asp-area="" asp-controller="PermitTypes" asp-action="index"><span class="fa fa-ticket-alt"></span><span style="padding-left:.5em;">LOTS Permit</span></a></li>
+                            <li> <a asp-area="" asp-controller="PermitteeTypes" asp-action="index"><span class="fa fa-car"></span><span style="padding-left:.5em;">LOTS Permittee</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4" style="padding-top: 1em;">
+                    <span style="padding-left:1em;">We're Here For You</span>
+                        <div class="row">
+                            <ul style="list-style-type:none;">
+                                <li><a asp-area="" asp-controller="Home" asp-action="Contact"><span class="fa fa-phone"></span><span style="padding-left:.5em;">Contact LOTS</span> </a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="About"><span class="fa fa-info-circle"></span><span style="padding-left:.5em;">About LOTS </span></a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Privacy"><span class="fa fa-balance-scale"></span><span style="padding-left:.5em;">Business & Terms</span></a></li>
+                            </ul>
+                        </div>
+</div>
+
+                <div class="col-md-2" style="padding-top: 1em;">
+                    <div class="col-12" style="padding-top:1em; padding-left:.15em;">
+                        <img src="~/img/ISD_02.png" class="img-responsive" width="87" height="87" alt="ISD logo">
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<div style="background-color: #0b406c;">
+    <div class="container text-right" style="font-size: 9px; color:#FFF;">
+        copyright &copy; @DateTime.Now.Year - Los Angeles County ISD. All rights reserved. - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</div>
+

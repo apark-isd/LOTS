@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Tracking";
+    // Layout = "_LayoutWide";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row px-3" style="margin-top: 1rem;">
+    <div class="col-2 p-4" style="box-shadow: 2px 0 5px -2px #888;;">
+        <div class="mb-2">
+            <h5 class="display-6 mb-4">Search</h5>
+            <input type="search" class="form-control" id="permit-no" placeholder="PermitNo...">
+            <input type="search" class="form-control" id="employee-no" placeholder="EmpNo...">
+        </div>
+        <div id="search-result"></div>
+    </div>
+    <div class="col-10 px-4">
+        <div id="permit-info"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#permit-no").on('search', function () {
+                $('#search-result').html('');
+                $('#permit-info').html('');
+            });
+
+            $("#permit-no").keyup(function () {
+                $('#search-result').html('');
+
+                $.ajax({
+                    url: '@Url.Action("SearchPermit", "Permittee")',
+                    data: { permitNo: $(this).val() },
+                    success: function (data) {
+                        $('#search-result').html(data.html);
+                    },
+                    error: this.ajaxFailure
+                });
+            });
+            $("#employee-no").keyup(function () {
+                $('#search-result').html('');
+
+                $.ajax({
+                    url: '@Url.Action("SearchEmployee", "Permittee")',
+                    data: { employeeNo: $(this).val() },
+                    success: function (data) {
+                        $('#search-result').html(data.html);
+                    },
+                    error: this.ajaxFailure
+                });
+            });
+        })
+
+        function showPermit(no) {
+            $('.spinner-overlay').show();
+            alert(no);
+            $.ajax({
+                url: '@Url.Action("GetPermitteeInfo", "Permittee")',
+                data: { permitNumber: no },
+                success: function (data) {
+                    $('#permit-info').html(data.html);
+                    $('.spinner-overlay').hide();
+                },
+                error: this.ajaxFailure
+            });
+        }
+        function showEmployee(no) {
+            $('.spinner-overlay').show();
+            alert(no);
+            $.ajax({
+                url: '@Url.Action("GetEmployeeInfo1", "Permittee")',
+                data: { employeeNumber: no },
+                success: function (data) {
+                    $('#permit-info').html(data.html);
+                    $('.spinner-overlay').hide();
+                },
+                error: this.ajaxFailure
+            });
+        }
+    </script>
+}

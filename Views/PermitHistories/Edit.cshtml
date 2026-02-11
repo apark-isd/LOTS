@@ -1,0 +1,72 @@
+﻿@model LOTS3.Models.PermitHistory
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>PermitHistory</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="PermitteeId" class="control-label"></label>
+                <select asp-for="PermitteeId" class="form-control" asp-items="ViewBag.PermitteeId"></select>
+                <span asp-validation-for="PermitteeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LotId" class="control-label"></label>
+                <select asp-for="LotId" class="form-control" asp-items="ViewBag.LotId"></select>
+                <span asp-validation-for="LotId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermitNo" class="control-label"></label>
+                <input asp-for="PermitNo" class="form-control" />
+                <span asp-validation-for="PermitNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermitTypeId" class="control-label"></label>
+                <select asp-for="PermitTypeId" class="form-control" asp-items="ViewBag.PermitTypeId"></select>
+                <span asp-validation-for="PermitTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermitteeTypeId" class="control-label"></label>
+                <select asp-for="PermitteeTypeId" class="form-control" asp-items="ViewBag.PermitteeTypeId"></select>
+                <span asp-validation-for="PermitteeTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayTypeId" class="control-label"></label>
+                <select asp-for="PayTypeId" class="form-control" asp-items="ViewBag.PayTypeId"></select>
+                <span asp-validation-for="PayTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comments" class="control-label"></label>
+                <input asp-for="Comments" class="form-control" />
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

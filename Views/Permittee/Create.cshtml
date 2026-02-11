@@ -1,0 +1,357 @@
+﻿@model PermitteeCreateViewModel
+@{
+    ViewBag.Title = "Permittee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 style="padding-top:1em;">Create<a style="display: inline; font-size: 14px;"></a></h4>
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+<form enctype="multipart/form-data" asp-action="Create" method="post" class="mt-3">
+    <div class="col-md-12">
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6 ">
+                <strong><span style="color:red;"></span>Employee Number:(6 digits i.e.123456)</strong>
+                <span style="padding-bottom:7px;">
+                    <input asp-for="EmployeeNo" class="form-control" placeholder="Employee No" maxlength="6"/>
+                </span>
+            </span>
+        </div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6 ">
+                <strong><span style="color:red;">*</span> First Name:</strong>
+                <span style="padding-bottom:7px;">
+                    <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </span>
+            </span>
+            <span class="col-md-6">
+                <strong><span style="color:red;">*</span> Last Name:</strong>
+                <span style="padding-bottom:7px;">
+                    <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </span>
+            </span>
+        </div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6" style="padding-bottom:7px;">
+                <strong><span style="color:red;"></span> Email Address:</strong>
+                <input asp-for="Email" class="form-control" placeholder="Email Address" />
+            </span>
+            <span class="col-md-6" style="padding-bottom:7px;">
+                <strong>Phone Number:</strong>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </span>
+        </div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6">
+                <strong><span style="color:red;">*</span> Department:</strong><br/>
+                <span style="padding-bottom:7px;">
+                    <select asp-for="DepartmentId" class="form-control"
+                            asp-items="@(new SelectList(ViewBag.Departments,"Id","DepartmentName",TempData["deptId"]))">
+                        <option value="">-- Select department --</option>
+                    </select>
+                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                </span>
+            </span>
+            <span class="col-md-6">
+                <strong>Division:</strong>
+                <span style="padding-bottom:7px;">
+                    <input asp-for="Division" class="form-control" placeholder="Division" />
+                    <span asp-validation-for="Division" class="text-danger"></span>
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-12 row" style="padding:10px;">
+            <input type="hidden" id="hidden-Lots" name="hidden-Lots" />
+            <div id="lot-container"></div>
+        </div>
+        <div class="mb-4">
+            <h6 class="display-6 text-danger">@TempData["AddLot"]</h6>
+        </div>
+        <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#lotModal">Add LOT</button>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-12 row" style="padding:10px;">
+            <span class="col-md-6">
+                <input type="submit" value="Create" class="btn btn-primary" /> |
+                <a asp-action="Index">Back to List</a>
+            </span>
+        </div>
+    </div>
+</form>
+<!-- Modal -->
+<div class="modal fade" id="lotModal" tabindex="-1" aria-labelledby="lotModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="lotModalLabel">Add Lot</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="col-md-12 row" style="padding:7px;">
+                        <span class="col-md-6">
+                            <strong><span style="color:red;">*</span> Lot:</strong>
+                            <span style="padding-bottom:7px;">
+                                <select id="LotId" class="form-control" asp-items="@(new SelectList(ViewBag.Lots,"Id","LotName"))" required="true" >
+                                    <option value="">-- Select Lot --</option>
+                                </select>
+                            </span>
+                        </span>
+                        <span class="col-md-6">
+                            <strong><span style="color:red;"></span> Permit No:</strong>
+                            @if(User.IsInRole("Coordinator"))
+                            {
+                                <input id="PermitNo" asp-for="PermitNo" class="form-control" placeholder="" disabled="disabled" />
+                            }
+                            else
+                            {
+                                <input id="PermitNo" asp-for="PermitNo" class="form-control" placeholder="Permit No" />
+                            }
+                        </span>
+                    </div>
+                    <div class="col-md-12 row" style="padding:7px;">
+                        <span class="col-md-6">
+                            <strong><span style="color:red;">*</span>Permit Type:</strong>
+                            <span style="padding-bottom:7px;">
+                                <select id="PermitTypeId" class="form-control"
+                                        asp-items="@(new SelectList(ViewBag.PermitTypes,"Id","PermitTypeName"))">
+                                    <option value="">-- Select Permit Type --</option>
+                                </select>
+                            </span>
+                        </span>
+                        <span class="col-md-6">
+                            <strong><span style="color:red;">*</span>Permittee Type:</strong>
+                            <span style="padding-bottom:7px;">
+                                <select id="PermitteeTypeId" class="form-control"
+                                        asp-items="@(new SelectList(ViewBag.PermitteeTypes,"Id","PermitteeTypeName"))">
+                                    <option value="">-- Select Permittee Type --</option>
+                                </select>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="col-md-12 row" style="padding:7px;">
+                        <span class="col-md-6">
+                            <strong><span style="color:red;">*</span>Start Date:</strong>
+                            <input id="StartDate" asp-for="StartDate" class="form-control" />
+                        </span>
+                        <span class="col-md-6">
+                            <strong><span style="color:red;"></span>End Date:</strong>
+                            <input id="EndDate" asp-for="EndDate"  class="form-control" />
+                        </span>
+                    </div>
+                    <div class="col-md-12 row" style="padding:7px;">
+                        <span class="col-md-6">
+                            <strong><span style="color:red;">*</span>Pay Type:</strong>
+                            <span style="padding-bottom:7px;">
+                                <select id="PayTypeId" class="form-control"
+                                        asp-items="@(new SelectList(ViewBag.PayTypes,"Id","PayTypeName"))">
+                                    <option value="">-- Select Pay Type --</option>
+                                </select>
+                            </span>
+                        </span>
+                        <span class="col-md-6">
+                            <strong><span style="color:red;"></span>Keycard No:</strong>
+                            @if(User.IsInRole("Coordinator"))
+                            {
+                                <input id="KeycardNo" asp-for="KeycardNo" class="form-control" placeholder="" disabled="disabled" />
+                            }
+                            else
+                            {
+                                <input id="KeycardNo" asp-for="KeycardNo" class="form-control" placeholder="Keycard No" />
+                            }
+                        </span>
+                    </div>
+                    <div class="col-md-12 row" style="padding:7px;">
+                        <span class="col-md-12">
+                            <strong><span style="color:red;"></span>Comments:</strong>
+                            <input id="Comments" class="form-control" placeholder="Notes" />
+                        </span>
+                    </div>
+                    <input type="hidden" id="SeqLineNo" name="SeqLineNo" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="btn-add" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<script type="text/javascript">
+$(function () {
+    $("#EmployeeNo").keyup(function (event) {
+        var empNo = $('#EmployeeNo').val();
+        var url = '@Url.Action("GetEmployeeInfo", "Permittee")';
+            if (empNo.length == 6) {
+                    $.ajax
+                    ({
+                        //url: '@Url.Action("GetEmployeeInfo", "Permittee")',
+                        url: url,
+                        data: { employeeId: empNo },
+                        type: 'GET',
+                        success: function (data) {
+                            $('#FirstName').val(data.firstName);
+                            $('#LastName').val(data.lastName);
+                            $('#PhoneNumber').val(data.telephoneNumber);
+                            $('#Email').val(data.email);
+                            $('#Division').val(data.division);
+                            $('#DepartmentId').val(data.departmentId);
+                        }
+                    });
+                }
+            else {
+                    $('#FirstName').val("");
+                    $('#LastName').val("");
+                    $('#PhoneNumber').val("");
+                    $('#Email').val("");
+                    $('#Division').val("");
+                    $('#DepartmentId').val("");
+                }
+        }
+    );
+})
+$(function () {
+    $('#btn-add').on("click", function () {
+        var url = '@Url.Action("AddLots", "Permittee")';
+        if ($('#btn-add').html() == 'Update') {
+            url = '@Url.Action("UpdateLots", "Permittee")';
+        }
+        if ($('#btn-add').html() == 'Delete') {
+            url = '@Url.Action("DeleteLots","Permittee")';
+        }
+        $.ajax({
+            url: url,
+            data: {
+                seqLineNo: $('#SeqLineNo').val(),
+                lotId: $('#LotId').val(),
+                permitTypeId: $('#PermitTypeId').val(),
+                permitteeTypeId: $('#PermitteeTypeId').val(),
+                startDate: $('#StartDate').val(),
+                endDate: $('#EndDate').val(),
+                comments: $('#Comments').val(),
+                permitNo: $('#PermitNo').val(),
+                keycardNo: $('#KeycardNo').val(),
+                payTypeId: $('#PayTypeId').val(),
+                hiddenLots: $('#hidden-Lots').val(),
+            },
+            type: "GET",
+            success: function (result) {
+                $('#hidden-Lots').val(result.value);
+                $('#lot-container').html(result.html);
+                $('#SeqLineNo').val("");
+                $('#LotId').val("");
+                $('#PermitTypeId').val("");
+                $('#PermitteeTypeId').val("");
+                $('#StartDate').val("");
+                $('#EndDate').val("");
+                $('#Comments').val("");
+                $('#PermitNo').val("");
+                $('#KeycardNo').val("");
+                $('#PayTypeId').val("");
+                $('#btn-add').html('Save');
+            }
+        });
+    });
+})
+function EditModal(id) {
+    //alert(id);
+    $('#SeqLineNo').val(id);
+    $('#LotId').val($('#lotid-' + id).data('id'));
+    $('#PermitTypeId').val($('#permittypeid-' + id).data('id'));
+    $('#PermitteeTypeId').val($('#permitteetypeid-' + id).data('id'));
+    var startDate = $('#startdate-' + id).html();
+    var startParts = startDate.split('/');
+    $('#StartDate').val(startParts[2] + '-' + startParts[0] + '-' + startParts[1]);
+    var endDate = $('#enddate-' + id).html();
+    var endParts = endDate.split('/');
+    $('#EndDate').val(endParts[2] + '-' + endParts[0] + '-' + endParts[1]);
+    $('#Comments').val($('#comments-' + id).html());
+    $('#PermitNo').val($('#permitno-' + id).html());
+    $('#KeycardNo').val($('#keycardno-' + id).html());
+    $('#PayTypeId').val($('#paytypeid-' + id).data('id'));
+    $('#btn-add').html('Update');
+    $('#lotModalLabel').html('Edit');
+    $('#lotModal').modal('show');
+};
+function DeleteModal(id) {
+    //alert(id);
+    $('#SeqLineNo').val(id);
+    $('#LotId').val($('#lotid-' + id).data('id'));
+    $('#PermitTypeId').val($('#permittypeid-' + id).data('id'));
+    $('#PermitteeTypeId').val($('#permitteetypeid-' + id).data('id'));
+    var startDate = $('#startdate-' + id).html();
+    var startParts = startDate.split('/');
+    $('#StartDate').val(startParts[2] + '-' + startParts[0] + '-' + startParts[1]);
+    var endDate = $('#enddate-' + id).html();
+    var endParts = endDate.split('/');
+    $('#EndDate').val(endParts[2] + '-' + endParts[0] + '-' + endParts[1]);
+    $('#Comments').val($('#comments-' + id).html());
+    $('#PermitNo').val($('#permitno-' + id).html());
+    $('#KeycardNo').val($('#keycardno-' + id).html());
+    $('#PayTypeId').val($('paytypeid-' + id).data('id'));
+    $('#btn-add').html('Delete');
+    $('#lotModalLabel').html('Delete');
+    $('#lotModal').modal('show');
+};
+function addLotRequired(Message) {
+    alert(Message);
+};
+@if (ViewBag.JavaScriptFunction != null)
+{
+    @Html.Raw(ViewBag.JavaScriptFunction)
+}
+var mySelect = document.getElementById('PermitTypeId');
+mySelect.onchange = (event) => {
+    var inputText = event.target.value;
+    //console.log(inputText);
+    //alert(inputText);
+    if (inputText == 1052) {
+        document.getElementById("EndDate").disabled = false;
+    }
+    else
+    {
+        $('#EndDate').val("");
+        document.getElementById("EndDate").disabled = true;
+    }
+}
+//$(function () 
+//{
+//    $("#EmployeeNo").keyup(function (event) 
+//    {
+//        var empNo = $('#EmployeeNo').val();
+//        var url = '@Url.Action("GetEmployeeInfo", "Permittee")';
+//        if (empNo.length == 6) 
+//        {$.ajax
+//            ({
+//                //url: '@Url.Action("GetEmployeeInfo", "Permittee")',
+//                url: url,
+//                data: { employeeId: empNo },
+//                type: 'GET',
+//                success: function (data) 
+//                {
+//                    $('#FirstName').val(data.firstName);
+//                    $('#LastName').val(data.lastName);
+//                    $('#PhoneNumber').val(data.telephoneNumber);
+//                    $('#Email').val(data.email);
+//                    $('#Division').val(data.division);
+//                    $('#DepartmentId').val(data.departmentId);
+//                }
+//            });
+//        }
+//        else {
+//            $('#FirstName').val("");
+//            $('#LastName').val("");
+//            $('#PhoneNumber').val("");
+//            $('#Email').val("");
+//            $('#Division').val("");
+//            $('#DepartmentId').val("");
+//        }
+//    }
+//    );
+//})
+</script>
+}

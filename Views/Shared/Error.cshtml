@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Error";
+}
+
+@if(ViewBag.ErrorTitle == null)
+{
+   <h2 style="color:white;"> <strong> Error </strong></h2>
+    <div class="row">
+    <div class="col-md-1"> </div>
+
+    <div class="col-md-4">
+        <h2 class="text-primary" style=" align-content:center;">
+            <strong>Oops...</strong>
+        </h2>
+        <p style="align-content:center;">
+            <img src="~/img/carsError.png" width="396" height="190" alt="error image" />
+        </p>
+    </div>
+
+        <div class="col-md-1"> </div>
+
+    <div class="col-md-5 text-left">
+        <h2>  </h2>
+ <h5 style="padding-top:1em;">
+        @*@ViewBag.ErrorMessage*@
+        An error occured while processing your request. Please contact Andrew Park at apark@isd.lacounty.gov
+        @*<a style="display: inline; font-size: 14px;"></a>*@
+    </h5>
+        <p> </p>
+               <h5>Exception Details:</h5>
+            <div class="alert alert-danger">
+                <h5>Exception Path</h5>
+                <p>@ViewBag.ExceptionPath</p>
+            </div>
+    </div>
+
+    <div class="col-md-1"> </div>
+</div>
+
+    @*<div class="alert alert-danger">
+        <h5>Exception Message</h5>
+        <p>@ViewBag.ExceptionMessage</p>
+    </div>*@
+
+    @*<div class="alert alert-danger">
+        <h5>Exception Stack Trace</h5>
+        <p>@ViewBag.StackTrace</p>
+    </div>*@
+}
+else
+{
+
+    <div class="row">
+    <div class="col-md-1"> </div>
+
+    <div class="col-md-4">
+       <h3 style="padding-top:1em;" class="text-danger">@ViewBag.ErrorTitle</h3>
+        <h6 class="text-danger">@ViewBag.ErrorMessage</h6>
+        <p style="align-content:center;">
+            <img src="~/img/carsError.png" width="396" height="190" alt="error image" />
+        </p>
+    </div>
+
+    <div class="col-md-4 text-left">
+        <h2>  </h2>
+        <h2 class="text-primary text-left">
+            Something’s wrong here.
+        </h2>
+        <p class="text-left">
+            Sorry but the page you are looking for does not exist, has been removed, renamed or temporarily unavailable due to technical issues.
+        </p>
+    </div>
+
+    <div class="col-md-2"> </div>
+</div>
+}

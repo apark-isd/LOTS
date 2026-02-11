@@ -1,0 +1,256 @@
+@inject SignInManager<ApplicationUser> signInManager;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Language" content="en-us">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LOTS</title>
+
+    <link href="~/lib/bootstrap/dist/css/bootstrapSpacelab.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/all.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/css/bootstrap-spacelab.css" rel="stylesheet" />
+    <style type="text/css">
+        select {
+            width:200px;
+        }
+        body {
+            margin: 0;
+            background-color: white;
+        }
+        section {
+            padding: 5%;
+            min-height: 90vh;
+        }
+        /*.jumbotron {
+            margin-bottom: 0px;
+            background-image: url('~/img/indexImg.jpg');
+            background-color: white;
+            background-position: 0% 25%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #666;
+            font-family: Helvetica;
+        }*/
+        footer {
+            padding: 0%;
+            width: 100%;
+        }
+            /* unvisited & visited link 4 footer */
+            footer a:link, footer a:visited,
+            footer li a:link, footer li a:visited {
+                color: #fff;
+            }
+            /* mouse over & selected link 4 footer */
+            footer a:hover, footer li a:hover,
+            footer a:active, footer li a:active {
+                color: #d0af2a;
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/isdLOTS_rev.png" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                LOTS
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Home"
+                                   asp-action="Index">Home</a>
+                                <a class="dropdown-item" asp-controller="Home"
+                                   asp-action="About">About</a>
+                                <a class="dropdown-item" asp-controller="Home"
+                                   asp-action="Privacy">Privacy</a>
+                                <a class="dropdown-item" asp-controller="VehicleLiabilityWaivers"
+                                   asp-action="Index">Vehicle Liability Waiver</a>
+                                <!--<a class="dropdown-item" href="https://webadminisd.lacounty.gov/WebAdminISD/MyAccount/Default.aspx?uc=pwChange.ascx&1" target="_blank">Change Password</a>-->
+                            </div>
+                        </li>
+                    @if (User.IsInRole("Coordinator"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Permittee
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Permittee"
+                                asp-action="Create">New</a>
+                                <a class="dropdown-item" asp-controller="Permittee"
+                                asp-action="Index">Search</a>
+                                <a class="dropdown-item" asp-controller="Commissioners"
+                                asp-action="Index">Commissioner</a>
+                            </div>
+                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Reports</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="https://app.powerbigov.us/reportEmbed?reportId=a7b0fa44-ca2e-4a29-8c20-08dcc8ff8397&autoAuth=true&ctid=07597248-ea38-451b-8abe-a638eddbac81">
+                                        Permit</a>
+                                    <a class="dropdown-item" href="https://app.powerbigov.us/reportEmbed?reportId=34295756-fa8c-4975-accb-fadfeaf8bac8&autoAuth=true&ctid=07597248-ea38-451b-8abe-a638eddbac81">
+                                        Commissioner</a>
+                                </div>
+                            </li>
+                    }
+                    @if (User.IsInRole("Administrator") || User.IsInRole("ISD Parking Services"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Permittee
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Permittee"
+                                    asp-action="Create">New</a>
+                                <a class="dropdown-item" asp-controller="Permittee"
+                                    asp-action="Index">Search</a>
+                                <a class="dropdown-item" asp-controller="Commissioners"
+                                    asp-action="Index">Commissioner</a>
+                                <a class="dropdown-item" asp-controller="PermitHistories"
+                                    asp-action="Index">History</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manage
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Allocations"
+                                asp-action="index">Allocation</a>
+                                <a class="dropdown-item" asp-controller="Coordinators"
+                                asp-action="index">Coordinator</a>
+                                <a class="dropdown-item" asp-controller="Departments"
+                                asp-action="index">Department</a>
+                                <a class="dropdown-item" asp-controller="Lots"
+                                asp-action="index">Lot</a>
+                                <a class="dropdown-item" asp-controller="Locations"
+                                asp-action="index">Location</a>
+                                <a class="dropdown-item" asp-controller="PermitTypes"
+                                asp-action="index">Permit Type</a>
+                                <a class="dropdown-item" asp-controller="PermitteeTypes"
+                                asp-action="index">Permittee Type</a>
+                                <a class="dropdown-item" asp-controller="PayTypes"
+                                asp-action="index">Pay Type</a>
+                                <a class="dropdown-item" asp-controller="StatusTypes"
+                                asp-action="index">Status Type</a>
+                                <a class="dropdown-item" asp-controller="CheckTimes"
+                                asp-action="index">Check Time</a>
+                               @*<a class="dropdown-item" asp-controller="Account"
+                                asp-action="ChangePassword">Password</a>*@
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Reports
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="https://app.powerbigov.us/reportEmbed?reportId=930ab6e8-58ce-4f14-b085-e99026bc131b&autoAuth=true&ctid=07597248-ea38-451b-8abe-a638eddbac81">                             
+                                    Allocation</a>
+                                <a class="dropdown-item" href="https://app.powerbigov.us/reportEmbed?reportId=7a2e269c-8055-43a6-a60d-6caa4af6e384&autoAuth=true&ctid=07597248-ea38-451b-8abe-a638eddbac81">                             
+                                    Billing</a>
+                                <a class="dropdown-item" href="https://app.powerbigov.us/reportEmbed?reportId=34295756-fa8c-4975-accb-fadfeaf8bac8&autoAuth=true&ctid=07597248-ea38-451b-8abe-a638eddbac81">                             
+                                    Commissioner</a>
+                                <a class="dropdown-item" href="https://app.powerbigov.us/reportEmbed?reportId=78402e29-5f3f-48b2-8ee8-300ac3c87e47&autoAuth=true&ctid=07597248-ea38-451b-8abe-a638eddbac81&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLWdvdi1pb3dhLXJlZGlyZWN0LmFuYWx5c2lzLnVzZ292Y2xvdWRhcGkubmV0LyJ9">
+                                    Coordinators</a>
+                                <a class="dropdown-item" href="https://app.powerbigov.us/reportEmbed?reportId=a7b0fa44-ca2e-4a29-8c20-08dcc8ff8397&autoAuth=true&ctid=07597248-ea38-451b-8abe-a638eddbac81">                             
+                                    Permit</a>
+                                <a class="dropdown-item" href="https://app.powerbigov.us/reportEmbed?reportId=b46a841b-3767-4ba9-9a85-661327db3d7a&autoAuth=true&ctid=07597248-ea38-451b-8abe-a638eddbac81&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLWdvdi1pb3dhLXJlZGlyZWN0LmFuYWx5c2lzLnVzZ292Y2xvdWRhcGkubmV0LyJ9">
+                                    Jurors</a>
+                                <a class="dropdown-item" href="https://app.powerbigov.us/groups/me/insights/6c227b2f-abf8-44f1-abaa-55caf7f8191e?insightsSource=Desktop">
+                                    Quick Insights for Jurors</a>
+                                <a class="dropdown-item" href="https://app.powerbigov.us/reportEmbed?reportId=454225e1-4386-44cf-8d4e-0c2b2bdf4520&autoAuth=true&ctid=07597248-ea38-451b-8abe-a638eddbac81&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLWdvdi1pb3dhLXJlZGlyZWN0LmFuYWx5c2lzLnVzZ292Y2xvdWRhcGkubmV0LyJ9">
+                                    Tickets with HUB</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Vacancy
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Vacancies"
+                                    asp-action="Create">New</a>
+                            </div>
+                        </li>
+                    }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Administration"
+                                    asp-action="ListUsers">Users</a>
+                                <a class="dropdown-item" asp-controller="Administration"
+                                    asp-action="ListRoles">Roles</a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form method="post" asp-controller="account" asp-action="logout" >
+                                <button type="submit" class="nav-link btn btn-linkv py-0" style="width:auto">
+                                    Logout  @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a asp-action="register" asp-controller="account" class="nav-link">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="login" asp-controller="account" class="nav-link">Login</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            </div>
+        </div>
+        <!-- Image Background Page Header -->
+        <!-- Note: The background image is set within the business-casual.css file. -->
+        <!-- .container -->
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </section>
+
+    <footer>
+        <partial name="_FooterPartial" />
+    </footer>
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts", required: true)
+    }
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LOTS3.Models.Permit>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Index</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.DepartmentId)</th>
+            <th>@Html.DisplayNameFor(model => model.LotId)</th>
+            <th>Name</th>
+            <th>@Html.DisplayNameFor(model => model.PermitNo)</th>
+            <th>@Html.DisplayNameFor(model => model.KeycardNo)</th>
+            @*<th>@Html.DisplayNameFor(model => model.StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+            <th>@Html.DisplayNameFor(model => model.UpdatedDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Comments)</th>
+            <th>@Html.DisplayNameFor(model => model.PermitTypeId)</th>*@
+            <th>@Html.DisplayNameFor(model => model.PermitteeTypeId)</th>
+            @*<th>@Html.DisplayNameFor(model => model.Permittee)</th>*@
+            <th>@Html.DisplayNameFor(model => model.PayTypeId)</th>
+            <th>@Html.DisplayNameFor(model => model.StatusTypeId)</th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Department.DepartmentName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Lot.LotName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Permittee.FirstName) @Html.DisplayFor(modelItem => item.Permittee.LastName)</td>
+            <td>@Html.DisplayFor(modelItem => item.PermitNo)</td>
+            <td>@Html.DisplayFor(modelItem => item.KeycardNo)</td>
+            @*<td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.UpdatedDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.Comments)</td>
+            <td>@Html.DisplayFor(modelItem => item.PermitType.PermitTypeName)</td>*@
+            <td>@Html.DisplayFor(modelItem => item.PermitteeType.PermitteeTypeName)</td>
+            <td>@Html.DisplayFor(modelItem => item.PayType.PayTypeName)</td>
+            <td>@Html.DisplayFor(modelItem => item.StatusType.StatusTypeName)</td>
+            @*<td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> | 
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>

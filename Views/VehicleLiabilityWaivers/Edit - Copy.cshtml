@@ -1,0 +1,92 @@
+﻿@model LOTS3.Models.VehicleLiabilityWaiver
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>VehicleLiabilityWaiver</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="DateRequested" class="control-label"></label>
+                <input asp-for="DateRequested" class="form-control" />
+                <span asp-validation-for="DateRequested" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReasonForRequest" class="control-label"></label>
+                <input asp-for="ReasonForRequest" class="form-control" />
+                <span asp-validation-for="ReasonForRequest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YesEmployee" class="control-label"></label>
+                <input asp-for="YesEmployee" class="form-control" />
+                <span asp-validation-for="YesEmployee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoCompany" class="control-label"></label>
+                <input asp-for="NoCompany" class="form-control" />
+                <span asp-validation-for="NoCompany" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartmentId" class="control-label"></label>
+                <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LotId" class="control-label"></label>
+                <select asp-for="LotId" class="form-control" asp-items="ViewBag.LotId"></select>
+                <span asp-validation-for="LotId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermitNo" class="control-label"></label>
+                <input asp-for="PermitNo" class="form-control" />
+                <span asp-validation-for="PermitNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MakeModel" class="control-label"></label>
+                <input asp-for="MakeModel" class="form-control" />
+                <span asp-validation-for="MakeModel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LicensePlateNumber" class="control-label"></label>
+                <input asp-for="LicensePlateNumber" class="form-control" />
+                <span asp-validation-for="LicensePlateNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Signature" class="control-label"></label>
+                <input asp-for="Signature" class="form-control" />
+                <span asp-validation-for="Signature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

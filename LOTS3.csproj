@@ -1,0 +1,92 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-LOTS3-62C2CF25-ADF5-417A-BA02-8C3D86C8B0FA</UserSecretsId>
+    <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210923180719_LotNoString.cs" />
+    <Compile Remove="Migrations\20210923180719_LotNoString.Designer.cs" />
+    <Compile Remove="Migrations\20220110232755_AddingIdentity.cs" />
+    <Compile Remove="Migrations\20220110232755_AddingIdentity.Designer.cs" />
+    <Compile Remove="Migrations\20220228181752_AddStatusTypeToPermittee.cs" />
+    <Compile Remove="Migrations\20220228181752_AddStatusTypeToPermittee.Designer.cs" />
+    <Compile Remove="Migrations\20220318211510_RequestedUpdatedStatusDate.cs" />
+    <Compile Remove="Migrations\20220318211510_RequestedUpdatedStatusDate.Designer.cs" />
+    <Compile Remove="Migrations\20220505170026_PermitHistory.cs" />
+    <Compile Remove="Migrations\20220505170026_PermitHistory.Designer.cs" />
+    <Compile Remove="Migrations\20220505172609_PermitHistory.cs" />
+    <Compile Remove="Migrations\20220505172609_PermitHistory.Designer.cs" />
+    <Compile Remove="Migrations\20220506212246_RemoveStatusIdFromPermit.cs" />
+    <Compile Remove="Migrations\20220506212246_RemoveStatusIdFromPermit.Designer.cs" />
+    <Compile Remove="Migrations\20220510203843_StatusTypeIdToProduction.cs" />
+    <Compile Remove="Migrations\20220510203843_StatusTypeIdToProduction.Designer.cs" />
+    <Compile Remove="Migrations\20220511212236_StatusType1.cs" />
+    <Compile Remove="Migrations\20220511212236_StatusType1.Designer.cs" />
+    <Compile Remove="Migrations\20220629211406_AddLocation.cs" />
+    <Compile Remove="Migrations\20220629211406_AddLocation.Designer.cs" />
+    <Compile Remove="Migrations\20220806215111_Coordinators.cs" />
+    <Compile Remove="Migrations\20220806215111_Coordinators.Designer.cs" />
+    <Compile Remove="Migrations\20220806220133_Coordinator.cs" />
+    <Compile Remove="Migrations\20220806220133_Coordinator.Designer.cs" />
+    <Compile Remove="Migrations\20221025174904_Allocation.cs" />
+    <Compile Remove="Migrations\20221025174904_Allocation.Designer.cs" />
+    <Compile Remove="Migrations\20221025175048_Allocation.cs" />
+    <Compile Remove="Migrations\20221025175048_Allocation.Designer.cs" />
+    <Compile Remove="Migrations\20221025175522_Allocation.cs" />
+    <Compile Remove="Migrations\20221025175522_Allocation.Designer.cs" />
+    <Compile Remove="Migrations\20221025175737_Allocation.cs" />
+    <Compile Remove="Migrations\20221025175737_Allocation.Designer.cs" />
+    <Compile Remove="Migrations\20221025180127_Allocation.cs" />
+    <Compile Remove="Migrations\20221025180127_Allocation.Designer.cs" />
+    <Compile Remove="Migrations\20230120191631_StatusTypeToPermit.cs" />
+    <Compile Remove="Migrations\20230120191631_StatusTypeToPermit.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.10.4" />
+    <PackageReference Include="jQuery" Version="3.6.0" />
+    <PackageReference Include="MailKit" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.32">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.10.0" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.10.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Mindscape.Raygun4Net.AspNetCore" Version="6.6.5" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\lib\jquery\jquery.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\jquery\jquery.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\jquery\jquery.min.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

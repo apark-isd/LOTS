@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Permittee>
+
+@{
+    ViewBag.Title = "Permittee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 style="padding-top:1em;">Permittees 
+    <a style="display: inline; font-size: 14px;" asp-action="Create">
+    <i class="fas fa-user-plus"></i>
+    </a></h4>
+<form method="get" asp-controller="Permittee" asp-action="Index">
+    @*<div class="input-group mb-3" style="padding:10px;">
+                <span class="col-md-6">
+                    <input type="text" id="EmployeeNumber" name="EmployeeNumber" placeholder="Employee Number" />
+                    <button class="btn btn-primary" type="submit" style="width:auto">Search</button>
+                </span>
+        </div>*@
+    <table class="table" id="datatable">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.EmployeeNo)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                <th>@Html.DisplayNameFor(model => model.Department.DepartmentName)</th>
+                @*<th>@Html.DisplayNameFor(model => model.Permits.Lot.LotNo)</th>
+                <th>@Html.DisplayNameFor(model => model.Permits.StartDate)</th>
+                <th>@Html.DisplayNameFor(model => model.Permits.EndDate)</th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.EmployeeNo)</td>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Department.DepartmentName)</td>
+                @*<td>@Html.DisplayFor(modelItem => item.Permits..LotNo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Permits[i].StartDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Permits.EndDate)</td>*@
+                <td>
+                <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-1x fa-info"></i></a> |
+                <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-1x fa-edit"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-1x fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @section scripts{
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#datatable').DataTable();
+            });
+        </script>
+    }
+</form>

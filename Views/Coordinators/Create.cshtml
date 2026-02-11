@@ -1,0 +1,99 @@
+﻿@model LOTS3.Models.Coordinator
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<h1>Create</h1>*@
+<h4 style="padding-top:1em;">Create<a style="display: inline; font-size: 14px;"></a></h4>
+<h4>Coordinator</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EmployeeNo" class="control-label"></label>
+                <input asp-for="EmployeeNo" class="form-control" />
+                <span asp-validation-for="EmployeeNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Division" class="control-label"></label>
+                <input asp-for="Division" class="form-control" />
+                <span asp-validation-for="Division" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="DepartmentId" class="control-label"></label>
+                <select asp-for="DepartmentId" class ="form-control" asp-items="ViewBag.DepartmentId"></select>*@
+                <select asp-for="DepartmentId" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Departments,"Id","DepartmentName"))">
+                    <option value="">-- Select department --</option>
+                </select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+    $(function (){
+        $("#EmployeeNo").keyup(function (event){
+            var empNo = $('#EmployeeNo').val();
+            if(empNo.length == 6) 
+            {
+                $.ajax
+                (
+                    {
+                        url: '@Url.Action("GetEmployeeInfo", "Coordinators")',
+                        data: {employeeId: empNo},
+                        type: 'GET',
+                        success: function (data)
+                        {
+                            $('#FirstName').val(data.firstName);
+                            $('#LastName').val(data.lastName);4
+                            $('#PhoneNumber').val(data.telephoneNumber);
+                            $('#Email').val(data.email);
+                            $('#Division').val(data.division);
+                            $('#DepartmentId').val(data.departmentId);
+                        }
+                    }
+                );
+            }
+            else
+            {
+                $('#FirstName').val("");
+                $('#LastName').val("");
+                $('#PhoneNumber').val("");
+                $('#Email').val("");
+                $('#Division').val("");
+                $('#DepartmentId').val("");
+            }
+        });
+    })
+    </script>
+}

@@ -1,0 +1,84 @@
+﻿@model LOTS3.Models.Allocation
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 style="padding-top:1em;">Create Allocation<a style="display: inline; font-size: 14px;"></a></h4>
+<div class="row">
+    <div class="col-md-4">
+    <form enctype="multipart/form-data" asp-action="Create" method="post" class="mt-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span style="color:red;"></span>Department<br/>
+                <select asp-for="DepartmentId" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Departments,"Id","DepartmentName"))">
+                    <option value="">-- Select department --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <span style="color:red;"></span>Lot<br/>
+                <select asp-for="LotId" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Lots,"Id","LotName"))">
+                    <option value="">-- Select Lot --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AllocationNo" class="control-label"></label>
+                <input asp-for="AllocationNo" class="form-control" />
+                <span asp-validation-for="AllocationNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IssuedNo" class="control-label"></label>
+                <input asp-for="IssuedNo" class="form-control"/>
+                <span asp-validation-for="IssuedNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlusMinusAllocation" class="control-label"></label>
+                <input asp-for="PlusMinusAllocation" class="form-control" readonly="true"/>
+                <span asp-validation-for="PlusMinusAllocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+<script type="text/javascript">
+ $(document).ready(function(){
+     $("#AllocationNo,#IssuedNo").keyup(function(){
+         var total = 0;
+         var x = Number($("#AllocationNo").val());
+         var y = Number($("#IssuedNo").val());
+         var total = y - x;
+         $("#PlusMinusAllocation").val(total);
+     });
+ });
+$(function () {
+$("#DepartmentId,#LotId").change(function () {
+    var deptId = $('#DepartmentId').val();
+    var lId = $('#LotId').val();
+    $.ajax
+    (
+        {
+            url: '@Url.Action("GetIssuedCount", "Allocations")',
+            data: { departmentId: deptId, lotId: lId },
+            type: 'GET',
+            success: function (data) 
+            {
+                $('#IssuedNo').val(data.issuedCount);
+            }
+        }
+    );
+});
+})
+
+</script>
+}
+

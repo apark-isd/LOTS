@@ -1,0 +1,56 @@
+﻿@model IEnumerable<LOTS3.Models.Commissioner>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+<h4 style="padding-top:1em;">Commissioner
+    <a style="display: inline; font-size: 14px;" asp-action="Create">
+        <i class="fas fa-user-plus"></i></a>
+</h4>
+@*<p class="text-right"><a href="@Url.Action("Create")" class="btn btn-outline-info">New Commissioner</a></p>*@
+</div>
+<p class="text-right"><a href="@Url.Action("Create")" class="btn btn-outline-info">New Commissioner</a></p>
+<table class="table" id="datatable" style="width:100%">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Department)</th>
+            <th>@Html.DisplayNameFor(model => model.Lot)</th>
+            <th>Name</th>
+            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+            <th>@Html.DisplayNameFor(model => model.CardNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.StatusType.StatusTypeName)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Department.DepartmentName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Lot.LotNo)</td>
+            <td>@Html.DisplayFor(modelItem => item.LastName),@Html.DisplayFor(modelItem => item.FirstName)</td>
+            <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.CardNumber)</td>
+            <td>@Html.DisplayFor(modelItem => item.StatusType.StatusTypeName)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                @if(User.IsInRole("Administrator") || User.IsInRole("ISD Parking Services"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.Id"> | Delete</a>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@section scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable();
+        });
+    </script>
+}

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<LOTS3.Models.Allocation>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 style="padding-top:1em;">Civic Center Allocation
+    <a style="display: inline; font-size: 14px;" asp-action="Create">
+        <i class="fas fa-user-plus"></i></a>
+</h4>
+<form method="get" asp-controller="Allocations" asp-action="Index">
+<table class="table" id="datatable" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AllocationNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IssuedNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlusMinusAllocation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lot.LotName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllocationNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IssuedNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlusMinusAllocation)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section scripts{
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#datatable').DataTable();
+            });
+        </script>
+    }
+</form>

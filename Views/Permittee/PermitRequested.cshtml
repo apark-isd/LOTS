@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Permit>
+@{
+    ViewBag.Title = "Permittees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<h4 style="padding-top:1em;">
+    Permittees
+    <a style="display: inline; font-size: 14px;" asp-action="Create">
+        <i class="fas fa-user-plus"></i>
+    </a>
+</h4>*@
+<form id="requestedIndexForm" method="post" asp-controller="Permittee" asp-action="RequestedIndex">
+    <div class="col-md-12 row" style="padding:7px;">
+        <span class="col-md-auto" style="padding:7px; padding-top:1em;">
+            <h4>Requested Permittees
+                <a style="display: inline; font-size: 14px;" asp-action="Create">
+                    <i class="fas fa-user-plus"></i></a>
+            </h4>
+        </span>
+@*      <span class="col-md-auto" style="padding:7px; padding-top:1em;">
+            @if (User.IsInRole("Coordinator"))
+            {
+                <select id="DepartmentId" name="DepartmentId" class="form-control font-weight-bold" disabled="true"
+                    asp-items="@(new SelectList(ViewBag.Departments,"Id","DepartmentName", ViewBag.DepartmentId))">
+                    <option style="align-items:center" value="">-- Select department --</option>
+                </select>
+            }
+            else
+            {
+                <select id="DepartmentId" name="DepartmentId" class="form-control font-weight-bold"
+                    asp-items="@(new SelectList(ViewBag.Departments,"Id","DepartmentName", ViewBag.DepartmentId))">
+                    <option style="align-items:center" value="">-- Select department --</option>
+                </select>
+            }
+        </span>*@
+    </div>
+    <table class="table" id="datatable" style="width:110%">
+        <thead>
+            <tr align="center" style="width:auto">
+                <th>Department</th>
+                <th>Emp#/L,FirstName</th>
+                <th>Permit/Key#</th>
+                <th>End</th>
+                <th>Status</th>
+                <th>Requested</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr align="left">
+                    <td>@Html.DisplayFor(modelItem => item.Department.DepartmentName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Permittee.EmployeeNo)/@Html.DisplayFor(modelItem => item.Permittee.LastName),@Html.DisplayFor(modelItem => item.Permittee.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PermitNo)/@Html.DisplayFor(modelItem => item.KeycardNo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StatusType.StatusTypeName)</td>
+                    <th>@Html.DisplayFor(modelItem => item.Permittee.RequestedDate)</th>
+                    <td style="width:auto">
+                        <a asp-action="Details" asp-route-id="@item.Permittee.Id"><i class="fas fa-1x fa-info"></i></a>|
+                        <a asp-action="Edit" asp-route-id="@item.Permittee.Id"><i class="fas fa-1x fa-edit"></i></a>|
+                        <a asp-action="Delete" asp-route-id="@item.Permittee.Id"><i class="fas fa-1x fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p><strong>Total Permits: @Model.Count()</strong></p>
+    @section scripts{
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#datatable').DataTable({
+                    searching: true,
+                    paging: false,
+                    lengthChange: false,
+                    ordering: true,
+                    info: false,
+                    language: {
+                        search: "Search:",
+                        searchPlaceholder: "Type to search..."
+                    }
+                });
+
+                $('#DepartmentId').change(function () {
+                    $('#requestedIndexForm').submit();
+                });
+            });
+        </script>
+    }
+</form>

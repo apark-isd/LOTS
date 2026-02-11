@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Registration</h1>
+
+<legend>Parking Coordinator Information </legend>
+<!--
+Employee Number
+    -->
+<div class="col-md-12">
+    <div class="col-md-12" style="padding:15px;">
+        <div class="col-md-6 row">
+            <span class="col-md-12">
+                <div class="pull-left"><strong><span style="color:red;">*</span> Employee Number:</strong></div>
+            </span>
+            <span class="col-md-12" style="padding-bottom:10px;">
+                <input class="form-control" id="EmployeeNo" type="text" width="100%">
+
+            </span>
+        </div>
+
+    </div>
+    <!--
+    Name First and Last
+           -->
+    <div class="col-md-12">
+        <div class="col-md-12 row" style="padding:15px;">
+            <span class="col-md-6 ">
+                <div class="pull-left"><strong><span style="color:red;">*</span> First Name:</strong></div>
+                <span style="padding-bottom:10px;">
+                    <input class="form-control" id="Name" type="text" width="100%">
+                </span>
+            </span>
+
+            <span class="col-md-6">
+                <div class="pull-left"><strong><span style="color:red;">*</span> Last Name:</strong></div>
+                <span style="padding-bottom:10px;">
+                    <input class="form-control" id="Surname" type="text" width="100%">
+                </span>
+            </span>
+        </div>
+
+        <div class="col-md-12 row" style="padding:15px;">
+            <span class="col-md-4" style="padding-bottom:10px;">
+                <div class="pull-left"><strong><span style="color:red;">*</span> Phone Number:</strong></div>
+                <input class="form-control" id="Phone" type="text" width="100%">
+            </span>
+
+            <span class="col-md-8" style="padding-bottom:10px;">
+                <div class="pull-left"><strong><span style="color:red;">*</span> Email Address:</strong></div>
+                <input class="form-control" id="Email" type="text" width="100%">
+            </span>
+        </div>
+    </div>
+
+    <legend>Department Information</legend>
+    <!--
+       Department & Section Information
+    -->
+    <div class="col-md-12">
+        <div class="col-md-12 row" style="padding:15px;">
+            <span class="col-md-6">
+                <div class="pull-left"><strong><span style="color:red;">*</span> Department:</strong></div>
+                <span style="padding-bottom:10px;">
+                    <select class="form-control">
+                        <option value="ACWM">Agricultural Commissioner/ Weights & Measures</option>
+                        <option value="APD">Alternate Public Defender</option>
+                        <option value="ACC">Animal Care & Control</option>
+                        <option value="Arts"> Arts and Culture</option>
+                        <option value=" Assessor ">Assessor</option>
+                        <option value="Auditor">Auditor-Controller</option>
+                        <option value="Beaches">Beaches & Harbors</option>
+                        <option value="CEO">Chief Executive Office</option>
+                        <option value="DCSS">Child Support Services</option>
+                        <option value="DCFS">Children & Family Services</option>
+                        <option value=" ConsumerAffairs ">Consumer & Business Affairs</option>
+                        <option value="CountyCounsel">County Counsel</option>
+                        <option value="DA">District Attorney</option>
+                        <option value="BOS">Board of Supervisors</option>
+                        <option value="Fire">Fire Department</option>
+                        <option value="DHS">Health Services</option>
+                        <option value="HR">Human Resources</option>
+                        <option selected value="ISD">Internal Services</option>
+                        <option value="Library">Library</option>
+                        <option value="Coroner">Medical Examiner-Coroner</option>
+                        <option value="DMH">Mental Health</option>
+                        <option value="MVA">Military & Veterans Affairs</option>
+                        <option value="PublicDefender">Public Defender</option>
+                        <option value="Parks">Parks & Recreation</option>
+                        <option value="Probation">Probation</option>
+                        <option value="DPH">Public Health</option>
+                        <option value="DPSS">Public Social Services</option>
+                        <option value="DPW">Public Works</option>
+                        <option value="Planning">Regional Planning</option>
+                        <option value=" Registrar-Recorder ">Registrar-Recorder/ County Clerk</option>
+                        <option value="Sheriff">Sheriff</option>
+                        <option value="TTC">Treasurer & Tax Collector</option>
+                        <option value="WDACS">Workforce Development, Aging & Community Services</option>
+
+                    </select>
+                </span>
+            </span>
+            <!-- L.A. County or Other  -->
+            <span class="col-md-6">
+                <div class="pull-left"><strong><span style="color:red;">*</span>Section:</strong></div>
+                <span style="padding-bottom:10px;">
+                    <input class="form-control" id="Email" type="text" width="100%">
+                </span>
+            </span>
+        </div>
+
+        <div class="col-md-11" style="padding:15px;">
+            <span class="col-md-12" style="padding-right:5px;">
+                <div class="pull-left" style="padding-left:9px;"><strong> If Other is selected in Org. Type please it enter below:</strong></div>
+            </span>
+            <span class="col-md-6" style="padding-bottom:10px;">
+                <input class="form-control" id="OtherType" type="text" width="100%">
+            </span>
+        </div>
+
+        <div class="col-md-12 row" style="padding:15px;">
+            <span class="col-md-8 ">
+                <div class="pull-left"><strong>&nbsp;</strong></div>
+            </span>
+            <span class="col-md-2" style="padding-bottom:10px;">
+                <input class="btn btn-danger btn-block  pull-right" type="reset" value="Cancel">
+            </span>
+            <span class="col-md-2" style="padding-bottom:10px;">
+                <input class="btn btn-success btn-block  pull-right" type="submit" value="Register">
+            </span>
+        </div>
+    </div>
+</div>

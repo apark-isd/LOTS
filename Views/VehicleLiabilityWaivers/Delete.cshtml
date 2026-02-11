@@ -1,0 +1,182 @@
+﻿@model LOTS3.Models.VehicleLiabilityWaiver
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    p {
+        line-height: 1em;
+    }
+    strong {
+        font-weight: bold;
+    }
+    div {
+        vertical-align: bottom;
+    }
+    .mt-3 {
+        margin-top: 0 !important;
+    }
+    .lb-md {
+        font-size: 17px;
+        font-weight: 500;
+        color: black;
+        width: auto;
+    }
+    .form-control:focus:active {
+        background-color: #e6e6ff !important;
+        border-color: #e6e6ff;
+    }
+    .form-control {
+        background-color: #e6e6ff !important;
+        border-color: #e6e6ff;
+        font-weight: bold;
+        color: black;
+        /* width:auto;*/
+    }
+    .ml1 {
+        margin-left: 1em;
+    }
+    .ml2 {
+        margin-left: 2em;
+        color: black;
+    }
+    .ml3 {
+        margin-left: 3em;
+        color: black;
+    }
+    .ml4 {
+        margin-left: 4em;
+        color: black;
+    }
+</style>
+<div class="row mt-2">
+    <p class="form-group font-weight-bold text-center text-danger h2">Are you sure you want to delete this?</p>
+</div>
+<div class="card border-0">
+        <div class="row mt-2 mb-4 align-middle">
+            <div class="col ml-lg-3 align-middle">
+                <h3><strong>ISD PARKING SERVICES</strong></h3>
+                <h5>Telephone: (213)974-9505</h5>
+                <h5>E-mail: <a href="mailto:ISDParkingRequest@isd.lacounty.gov"><u>ISDParkingRequest@isd.lacounty.gov</u></a></h5>
+            </div>
+            <div class="col mr-lg-3 align-middle">
+                <img src="~/img/ISD_02.png" style="width:110px; height:110px;" align="right" />
+            </div>
+        </div>
+        <div class="form-group border border-dark">
+            <div class="form-group border border-dark font-weight-bold text-center p-1 mb-2 bg-dark text-white">
+                VEHICLE LIABILITY WAIVER
+            </div>
+            <div class="form-group font-weight-bold text-center mt-lg-3 mb-lg-3 text-danger h5">
+                <u>Subject to review & approval by ISD Parking Services</u>
+            </div>
+            <div class="form-group ml1 font-weight-bold lh-lg text-dark col-sm-10">
+                Forms must be submitted to <a href="mailto:ISDParkingRequest@isd.lacounty.gov" class="text-primary"><u>ISD Parking Services</u></a> via email by 2:00 PM for same day requests,
+                or 24-hours in adance for future requests.
+            </div>
+            <div class="ml2 mb-2 row">
+                <label for="DateRequested" class="lb-md">Date(s) Requested:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" asp-for="DateRequested" asp-format="{0:yyyy-MM-dd}">
+                </div>
+            </div>
+            <div class="ml2 mb-4 row">
+                <label for="ReasonForRequested" class="lb-md">Reason for Request:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="ReasonForRequest">
+                </div>
+            </div>
+            <div class="ml2 mb-2 row">
+                <p class="h6"><u><strong>Vehicle Owner's Information</strong></u></p>
+            </div>
+            <div class="ml2 mb-4 row">
+                <label for="Name" class="lb-md ">Name:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" asp-for="Name">
+                </div>
+            </div>
+            <div class="ml2 mb-1 row">
+                <p class="lb-md">County of Los Angeles Employee? (Mark Appropriate Box)</p>
+            </div>
+            <div class="ml4 mb-1 row">
+                <input class="form-check-input" type="checkbox" id="YesEmployee" asp-for="YesEmployee">
+                <label class="form-check-label" for="yesEmployeeNumber">Yes - Employee Number:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" asp-for="EmployeeNumber">
+                </div>
+                <label for="department">Department:</label>
+                <div class="col-sm-5">
+                    <select asp-for="DepartmentId" class="form-control"
+                            asp-items="@(new SelectList(ViewBag.Department,"Id","DepartmentName"))">
+                        <option value="">-- Select department --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ml4 mb-4 row">
+                <input class="form-check-input" type="checkbox" id="NoCompany" asp-for="NoCompany">
+                <label class="form-check-label" for="gridCheck">No - Company</label>
+            </div>
+            <div class="ml2 mb-2 row">
+                <p class="h6"><strong>Parking Lot Information:</strong></p>
+            </div>
+            <div class="ml2 mb-4 row">
+                <label for="LotNumber">Lot Number:</label>
+                <div class="col-sm-2">
+                    <select asp-for="LotId" class="form-control"
+                            asp-items="@(new SelectList(ViewBag.Lot,"Id","LotName"))">
+                        <option value="">-- Select Lot --</option>
+                    </select>
+                </div>
+                <label for="permitNumber">Permit Number(if applicable)</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" asp-for="PermitNo" />
+                </div>
+            </div>
+            <div class="ml2 mb-2 row">
+                <p class="h6"><strong>Vehicle Information:</strong></p>
+            </div>
+            <div class="ml2 mb-2 row">
+                <label for="year">Year:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" asp-for="Year" />
+                </div>
+                <label for="makeModel">Make/Model:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" asp-for="MakeModel" />
+                </div>
+                <label for="color">Color:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" asp-for="Color" />
+                </div>
+            </div>
+            <div class="ml2 mb-4 row">
+                <label for="licensePlateNumber">License Plate Number:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" asp-for="LicensePlateNumber" />
+                </div>
+            </div>
+            <div class="form-group border border-dark font-weight-bold text-center p-1 mb-2 bg-secondary text-dark">
+                DISCLAIMER AND SIGNATURE
+            </div>
+            <div class="form-group ml-3 font-weight-bold lh-lg col-sm-10">
+                I agree that the County of Los Angeles <b><u>WILL NOT</u></b> be held responsible for any damages
+                or loss to my vehicle, or liability incurred by my vehicle, while parked in this parking lot on the date(s) requested above.</p>
+            </div>
+            <div class="form-group row ml-3">
+                <button type="button" class="btn btn-primary btnSignature" data-toggle="modal" data-target="#signatureModal">Signature</button>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="signedBy" asp-for="Signature" readonly />
+                </div>
+            </div>
+        </div>
+    </div>
+<form asp-action="Delete">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</form>
+

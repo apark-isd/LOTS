@@ -1,0 +1,90 @@
+﻿@model LOTS3.Models.Commissioner
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 style="padding-top:1em;">Delete</h4>
+<h4>Are you sure you want to delete this?</h4>
+@*<dl class="row">
+    <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.LastName)</dt>
+    <dd class = "col-sm-10">@Html.DisplayFor(model => model.LastName)</dd>
+    <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.FirstName)</dt>
+    <dd class = "col-sm-10">@Html.DisplayFor(model => model.FirstName)</dd>
+    <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.StartDate)</dt>
+    <dd class = "col-sm-10">@Html.DisplayFor(model => model.StartDate)</dd>
+    <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.EndDate)</dt>
+    <dd class = "col-sm-10">@Html.DisplayFor(model => model.EndDate)</dd>
+    <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.CardNumber)</dt>
+    <dd class = "col-sm-10">@Html.DisplayFor(model => model.CardNumber)</dd>
+    <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.Department)</dt>
+    <dd class = "col-sm-10">@Html.DisplayFor(model => model.Department.DepartmentName)</dd class>
+    <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.Lot)</dt>
+    <dd class = "col-sm-10">@Html.DisplayFor(model => model.Lot.LotName)</dd class>
+    <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.StatusType.StatusTypeName)</dt>
+    <dd class = "col-sm-10">@Html.DisplayFor(model => model.StatusType.StatusTypeName)</dd class>
+</dl>*@
+<div class="col-md-12 row" style="padding:7px;">
+    <span class="col-md-6">
+        <strong><span style="color:red;"></span> Department:</strong><br />
+        <span style="padding-bottom:7px;">
+            <select asp-for="DepartmentId" class="form-control" disabled="true"
+                    asp-items="@(new SelectList(ViewBag.Departments,"Id","DepartmentName", TempData["deptId"]))">
+                <option value="">-- Select department --</option>
+            </select>
+            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+        </span>
+    </span>
+    <span class="col-md-6">
+        <strong><span style="color:red;"></span> Lot:</strong>
+        <span style="padding-bottom:7px;">
+            <select asp-for="LotId" class="form-control" disabled="true"
+                    asp-items="@(new SelectList(ViewBag.Lots,"Id","LotName"))">
+                <option value="">-- Select Lot --</option>
+            </select>
+            <span asp-validation-for="LotId" class="text-danger"></span>
+        </span>
+    </span>
+</div>
+<div class="col-md-12 row" style="padding:7px;">
+    <span class="col-md-6">
+        <strong><span style="color:red;"></span> Last Name:</strong>
+        <span style="padding-bottom:7px;">
+            <input asp-for="LastName" class="form-control" placeholder="Last Name" readonly="true"/>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </span>
+    </span>
+    <span class="col-md-6 ">
+        <strong><span style="color:red;"></span> First Name:</strong>
+        <span style="padding-bottom:7px;">
+            <input asp-for="FirstName" class="form-control" placeholder="First Name" readonly="true"/>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </span>
+    </span>
+</div>
+<div class="col-md-12 row" style="padding:7px;">
+    <span class="col-md-6">
+        <strong><span style="color:red;"></span>Start Date:</strong>
+        <input id="StartDate" asp-for="StartDate" asp-format="{0:yyyy-MM-dd}" class="form-control" readonly="true"/>
+    </span>
+    <span class="col-md-6">
+        <strong><span style="color:red;"></span>End Date:</strong>
+        <input id="EndDate" asp-for="EndDate" asp-format="{0:yyyy-MM-dd}" class="form-control" readonly="true" />
+    </span>
+</div>
+<div class="col-md-12 row" style="padding:7px;">
+    <span class="col-md-6">
+        <strong><span style="color:red;"></span>Card Number:</strong>
+        <input id="CardNumber" asp-for="CardNumber" class="form-control" readonly="true" />
+    </span>
+    <span class="col-md-6">
+        <strong><span style="color:red;"></span>Status:</strong>
+            <select asp-for="StatusTypeId" class="form-control" disabled="true"
+                asp-items="@(new SelectList(ViewBag.StatusTypes,"Id","StatusTypeName"))">
+            </select>
+    </span>
+</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-action="Index">Back to List</a>
+</form>

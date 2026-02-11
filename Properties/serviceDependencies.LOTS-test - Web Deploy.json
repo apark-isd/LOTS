@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "identityapp1": {
+      "type": "identityapp.aad"
+    },
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/db-lots/databases/LOTS-test",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:PermitteeDBConnection"
+    }
+  }
+}

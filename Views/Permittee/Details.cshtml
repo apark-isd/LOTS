@@ -1,0 +1,143 @@
+﻿@model PermitteeCreateViewModel
+@{
+    ViewBag.Title = "Permittee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 style="padding-top:1em;">Details</h4>
+<form enctype="multipart/form-data" method="post" class="mt-3">
+    <div class="col-md-12">
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6 ">
+                <strong><span style="color:red;"></span>Employee Number:</strong>
+                <span style="padding-bottom:7px;">
+                    <input readonly asp-for="EmployeeNo" class="form-control" placeholder="Employee No" />
+                    <span asp-validation-for="EmployeeNo" class="text-danger"></span>
+                </span>
+            </span>
+            <span class="col-md-6 ">
+                <strong><span style="color:red;"></span>Requested:</strong>
+                <span style="padding-bottom:7px;">
+                    @* <input readonly asp-for="RequestedDate" class="form-control" type="date" /> *@
+                    <label readonly class="form-control">@Model.RequestedDate</label>
+                    <span asp-validation-for="RequestedDate" class="text-danger"></span>
+                </span>
+            </span>
+        </div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6 ">
+                <strong><span style="color:red;"></span>First Name:</strong>
+                <span style="padding-bottom:7px;">
+                    <input readonly asp-for="FirstName" class="form-control" placeholder="First Name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </span>
+            </span>
+            <span class="col-md-6">
+                <strong><span style="color:red;"></span>Last Name:</strong>
+                <span style="padding-bottom:7px;">
+                    <input readonly asp-for="LastName" class="form-control" placeholder="Last Name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </span>
+            </span>
+        </div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6" style="padding-bottom:7px;">
+                <strong><span style="color:red;"></span>Email Address:</strong>
+                <input readonly asp-for="Email" class="form-control" placeholder="Email Address" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </span>
+            <span class="col-md-6" style="padding-bottom:7px;">
+                <strong>Phone Number:</strong>
+                <input readonly asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </span>
+        </div>
+        <div class="col-md-12 row" style="padding:7px;">
+            <span class="col-md-6">
+                <strong><span style="color:red;"></span>Department:</strong>
+                <span style="padding-bottom:7px;">
+                    <select asp-for="DepartmentId" class="form-control" disabled
+                            asp-items="@(new SelectList(ViewBag.Departments,"Id","DepartmentName"))">
+                        <option value="">-- Select department --</option>
+                    </select>
+                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                </span>
+            </span>
+            <span class="col-md-6">
+                <strong><span style="color:red;"></span>Division:</strong>
+                <span style="padding-bottom:7px;">
+                    <input readonly asp-for="Division" class="form-control" placeholder="Division" />
+                    <span asp-validation-for="Division" class="text-danger"></span>
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-12 row" style="padding:10px;">
+            <div id="lot-container">
+                <TABLE class='table' id="lotTable">
+                    <thead>
+                        <tr align='center'>
+                            <th>Lot</th>
+                            <th>Permit No</th>
+                            <th>Keycard No</th>
+                            <th>Permit Type</th>
+                            <th>Permittee Type</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Pay Type</th>
+                            <th>Comments</th>
+                            @*<th>Status</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.MultipleLots.Count; i++)
+                        {
+                            <tr>
+                                <td id="lotid-@i" data-id="@Model.MultipleLots[i].LotId">@Model.MultipleLots[i].Lot.LotName</td>
+                                <td id="permitno-@i" data-id="@Model.MultipleLots[i].PermitNo">@Model.MultipleLots[i].PermitNo</td>
+                                <td id="keycardno-@i" data-id="@Model.MultipleLots[i].KeycardNo">@Model.MultipleLots[i].KeycardNo</td>
+                                <td id="permittypeid-@i" data-id="@Model.MultipleLots[i].PermitTypeId">@Model.MultipleLots[i].PermitType.PermitTypeName</td>
+                                <td id="permitteetypeid-@i" data-id="@Model.MultipleLots[i].PermitteeTypeId">@Model.MultipleLots[i].PermitteeType.PermitteeTypeName</td>
+                                <td id="startdate-@i">@string.Format("{0:d}", Model.MultipleLots[i].StartDate)</td>
+                                <td id="enddate-@i">@string.Format("{0:d}", Model.MultipleLots[i].EndDate)</td>
+                                <td id="paytypeid-@i" data-id="@Model.MultipleLots[i].PayTypeId">@Model.MultipleLots[i].PayType.PayTypeName</td>
+                                <td id="comments-@i">@Model.MultipleLots[i].Comments</td>
+                                @*<td id="statustypeid-@i" data-id="@Model.MultipleLots[i].StatusTypeId">@Model.MultipleLots[i].StatusType.StatusTypeName</td>*@
+                                @*<td><a href="#" class="edit" id="edit-@i" data-id="@i" onclick="EditModal(@i)">Edit</a></td>
+                                    <td><a href="#" class="delete" id="delete-@i" data-id="@i" onclick="DeleteModal(@i)">Delete</a></td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </TABLE>
+            </div>
+        </div>
+    </div>
+   <div class="col-md-12 row" style="padding:7px;">
+        <span class="col-md-4 ">
+            <strong><span style="color:red;"></span>Status:</strong>
+            <select asp-for="StatusTypeId" class="form-control" readonly="true" disabled="true"
+                asp-items="@(new SelectList(ViewBag.StatusTypes,"Id","StatusTypeName"))">
+                <option value="">-- Select Status Type --</option>
+            </select>
+        </span>
+        <span class="col-md-4 ">
+            <strong><span style="color:red;"></span>Status Updated:</strong>
+            <label readonly class="form-control">@Model.UpdatedStatusDate</label>
+        </span>
+        <span class="col-md-4 ">
+            <strong><span style="color:red;"></span>Cycle in Days:</strong>
+            <label readonly class="form-control">@ViewBag.businessDays</label>
+        </span>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-12 row" style="padding:10px;">
+            <span class="col-md-6">
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Index" asp-route-id="@Model.Id">Back to List</a>
+            </span>
+        </div>
+    </div>
+</form>
+
+
+

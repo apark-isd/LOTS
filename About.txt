@@ -1,0 +1,70 @@
+
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h1 style="padding-top:1em;">About</h1>
+
+    <div class="container">
+        <div class="container">
+            The Internal Services Department, Parking Services is responsible for the processing of permits for over 30 county departments.
+        </div>
+
+        <!-- Page Content -->
+        <div class="container" style="padding-top:1em; padding-bottom:3em;">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="background-color:#fff; padding:1.5em;">
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h2>What We Do</h2>
+                        <p>
+                        ISD Parking Services manages 26 (and counting) parking lots throughout the County and offers a wide variety of 
+                        services to County and Court employees, and the general public. The Civic Center in Downtown Los Angeles is a 
+                        critical parking hub for the County, requiring financial management and operational oversight of parking permits.
+                    </p>
+                        <p>
+                            <!--   -->
+                        <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register" style="width:auto">Coordinator Registration  &raquo;</a>
+                        </p>
+                    </div>
+                    <div class="col-sm-4">
+                        <h2>Contact Us</h2>
+                        <address>
+                        For troubleshooting contact <br />ISD Parking Services
+                        </address>
+                        <address style="padding-top:0.5em;">
+                        <abbr title="Phone">P: </abbr><a href="tel:2139749505" title="Click to call us">(213) 974-9505</a>
+                        </address>
+                        <address style="padding-top:0.25em;">
+                        <abbr title="Email">E: </abbr> <a href="mailto:ISDParkingRequest@isd.lacounty.gov">ISDParkingRequest@isd.lacounty.gov</a>
+                        </address>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <hr>
+
+
+                <h2>LOTS at a Glance</h2>
+                <span>Below are some statistics on how Doing Business With Los Angeles County looks.</span>
+                <p><br /> </p>
+                <div class="row">
+                    <div class="col-sm-4" ">
+                        <h2 class="text-center" style="color:gray;">26 lots</h2>
+                    <p class="text-center">Managed by ISD Parking Services’</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <h2 class="text-center" style="color:gray;">15,435</h2>
+                        <p class="text-center">PARKING SPACES</p>
+                    </div>
+                    <div class="col-sm-4">
+                    <h2 class="text-center" style="color:gray;">Over 7,000</h2>
+                    <p class="text-center">Permits</p>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+        </div>
+    </div>

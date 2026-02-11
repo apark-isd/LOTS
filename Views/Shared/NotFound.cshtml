@@ -1,0 +1,39 @@
+﻿@{ 
+    ViewBag.Title = "Not Found";
+}
+
+<h2 style="color:white;"> <strong> Error </strong></h2>  
+<div class="row">
+    <div class="col-md-1"> </div>
+
+    <div class="col-md-4">
+        <h2 class="text-primary" style=" align-content:center;">
+            <strong>Oops...</strong>
+        </h2>
+        <p style="align-content:center;">
+            <img src="~/img/carsError.png" width="396" height="190" alt="error image" />
+        </p>
+    </div>
+
+      <div class="col-md-1"> </div>
+
+    <div class="col-md-5 text-left">
+        <h2>  </h2>
+        <h2 class="text-primary text-left">
+            Something’s wrong here.
+        </h2>
+        <p class="text-left">
+               @ViewBag.ErrorMessage. 
+                An error occured while processing your request. 
+                The support team is notified and we are working on th fix. 
+                Please contact me on apark@isd.lacounty.gov
+                <a style="display: inline; font-size: 14px;"></a> <br />
+              <a asp-action="index" asp-controller="home">
+                Click here to navigate to the home page
+            </a>
+        </p>
+    </div>
+
+    <div class="col-md-1"> </div>
+</div>
+

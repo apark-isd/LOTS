@@ -1,0 +1,49 @@
+﻿@model IEnumerable<LOTS3.Models.PermitHistory>
+@{
+    ViewData["Title"] = "Permit History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 style="padding-top:1em;">Permit History</h4>
+<form method="get" asp-controller="PermitHistories" asp-action="Index">
+<table class="table" id="datatable" style="width:100%">
+    <thead>
+        <tr align="center" style="width:auto">
+           @*<th>Employee/@Html.DisplayNameFor(model => model.PermitNo)/@Html.DisplayNameFor(model => model.KeycardNo)</th>*@
+           <th>Employee/Permit</th>
+           <th>Type</th>
+           @*<th>Status</th>*@
+           <th>Updated</th>
+           @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr align="left">
+            <td>@Html.DisplayFor(modelItem => item.Department.DepartmentName)/@Html.DisplayFor(modelItem => item.EmployeeNo)/@Html.DisplayFor(modelItem => item.LastName),@Html.DisplayFor(modelItem => item.FirstName)/
+            @Html.DisplayFor(modelItem => item.PermitNo)</td>
+            <td>@Html.DisplayFor(modelItem => item.PermitType.PermitTypeName)
+                @*/@Html.DisplayFor(modelItem => item.PermitteeType.PermitteeTypeName)*@
+                /@Html.DisplayFor(modelItem => item.StatusType.StatusTypeName)
+                /@Html.DisplayFor(modelItem => item.StatusType1.StatusTypeName)
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.UpdatedDate, "{0:MM/dd/yyyy HH:mm}")</td>
+            @*<td>@Convert.ToDateTime(item.UpdatedDate).ToString("MM/dd/yyyy")</td>*@
+            @*<td style="width:auto">
+                <a asp-action="Details" asp-route-id="@item.Permittee.Id"><i class="fas fa-1x fa-info"></i></a> |
+                <a asp-action="Edit" asp-route-id="@item.Permittee.Id"><i class="fas fa-1x fa-edit"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.Permittee.Id"><i class="fas fa-1x fa-trash-alt"></i></a>
+            </td>*@
+        </tr>
+    }
+    </tbody>
+</table>
+@section scripts{
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#datatable').DataTable();
+            });
+        </script>
+    }
+</form>
